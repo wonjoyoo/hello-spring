@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class HelloController {
 
+//	public static StringBuffer memBuf = new StringBuffer();
+
 	@GetMapping("/")
 	public String index( Model model) {
 		return "index";
@@ -37,17 +39,23 @@ public class HelloController {
 		return "getdata";
 	}
 
-	@GetMapping("/sleep")
-	public String sleep(@RequestParam(name="time", required=false, defaultValue="1") long time, Model model) {
-		System.out.println("Sleeping duration =" + time);
+	@GetMapping("/heavy")
+	public String heavy(@RequestParam(name="time", required=false, defaultValue="1") long time, Model model) {
+		//System.out.println("Sleeping duration =" + time);
 		try {
 			Thread.sleep(time * 1000);
+			/*String temp="";
+			int j=1;
+			for(int i=0;i<1000 * 1000 * time;i++){
+				j = j*i;
+			}*/
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Wake up duration =" + time);
+		//System.out.println("Wake up duration =" + time);
 		model.addAttribute("time", time);
-		return "sleep";
+		return "heavy";
 	}
 
 }
