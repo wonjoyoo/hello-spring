@@ -44,11 +44,6 @@ public class HelloController {
 		//System.out.println("Sleeping duration =" + time);
 		try {
 			Thread.sleep(time * 1000);
-			/*String temp="";
-			int j=1;
-			for(int i=0;i<1000 * 1000 * time;i++){
-				j = j*i;
-			}*/
 
 		} catch (Exception e) {
 			e.printStackTrace();
