@@ -30,7 +30,7 @@ public class HelloController {
 	public String getdata(@RequestHeader("User-Agent") String userAgent, Model model) {
 		String result = null ;
 //		if (userAgent.indexOf("Chrome") != -1 ){
-			String url = "http://node-express-default.dev.abc.tanzukorea.xyz/";
+			String url = "http://node-test-default.dev.abc.tanzukorea.xyz/";
 			RestTemplate restTemplate = new RestTemplate();
 			result = restTemplate.getForObject(url, String.class);
 //		}
