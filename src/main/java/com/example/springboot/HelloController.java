@@ -29,11 +29,11 @@ public class HelloController {
 	@GetMapping("/getdata")
 	public String getdata(@RequestHeader("User-Agent") String userAgent, Model model) {
 		String result = null ;
-		if (userAgent.indexOf("Chrome") != -1 ){
+//		if (userAgent.indexOf("Chrome") != -1 ){
 			String url = "http://node-express.default.dev.abc.tanzukorea.xyz/";
 			RestTemplate restTemplate = new RestTemplate();
 			result = restTemplate.getForObject(url, String.class);
-		}
+//		}
 		model.addAttribute("result", result.length());
 		return "getdata";
 	}
