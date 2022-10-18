@@ -1,17 +1,17 @@
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='tanzukr.azurecr.io/app/tanzu-java-web-app-source')
+SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='tanzukr.azurecr.io/app/hellospring-source')
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='default')
 OUTPUT_TO_NULL_COMMAND = os.getenv("OUTPUT_TO_NULL_COMMAND", default=' > /dev/null ')
 
 k8s_custom_deploy(
-    'tanzu-java-web-app-ywj',
+    'hello-spring',
     apply_cmd="tanzu apps workload apply -f config/workload.yaml --debug --live-update" +
                " --local-path " + LOCAL_PATH +
                " --source-image " + SOURCE_IMAGE +
                " --namespace " + NAMESPACE +
                " --yes " +
                OUTPUT_TO_NULL_COMMAND +
-               " && kubectl get workload tanzu-java-web-app-ywj --namespace " + NAMESPACE + " -o yaml",
+               " && kubectl get workload hello-spring --namespace " + NAMESPACE + " -o yaml",
     delete_cmd="tanzu apps workload delete -f config/workload.yaml --namespace " + NAMESPACE + " --yes",
     deps=['pom.xml', './target/classes'],
     container_selector='workload',
@@ -20,6 +20,6 @@ k8s_custom_deploy(
     ]
 )
 
-k8s_resource('tanzu-java-web-app-ywj', port_forwards=["8080:8080"],
-            extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app-ywj'}])
+k8s_resource('hello-spring', port_forwards=["8080:8080"],
+            extra_pod_selectors=[{'serving.knative.dev/service': 'hello-spring'}])
 allow_k8s_contexts('iterate-cluster-admin@iterate-cluster')
